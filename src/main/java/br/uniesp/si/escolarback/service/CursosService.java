@@ -14,104 +14,87 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CursosService {
 
-    private final CursosRepository filmeRepository;
+    private final CursosRepository cursosRepository;
 
     public List<Cursos> listar() {
-        log.info("Buscando todos os filmes cadastrados");
+        log.info("Buscando todos os cursos cadastrados");
         try {
-            List<Cursos> filmes = filmeRepository.findAll();
-            log.debug("Total de filmes encontrados: {}", filmes.size());
-            return filmes;
+            List<Cursos> cursos = cursosRepository.findAll();
+            log.debug("Total de cursos encontrados: {}", cursos.size());
+            return cursos;
         } catch (Exception e) {
-            log.error("Falha ao buscar filmes: {}", e.getMessage(), e);
+            log.error("Falha ao buscar cursos: {}", e.getMessage(), e);
             throw e;
         }
     }
 
-    /**
-     * @param id o ID do filme.
-     * @return o filme encontrado, ou lança uma exceção {@link RuntimeException} se o filme não existir.
-     */
     public Cursos buscarPorId(Long id) {
-        log.info("Buscando filme pelo ID: {}", id);
-        return filmeRepository.findById(id)
-                .map(filme -> {
-                    log.debug("Filme encontrado: ID={}, Título={}", filme.getId(), filme.getTitulo());
-                    return filme;
+        log.info("Buscando curso pelo ID: {}", id);
+        return cursosRepository.findById(id)
+                .map(curso -> {
+                    log.debug("Curso encontrado: ID={}, Nome={}", curso.getId(), curso.getNome());
+                    return curso;
                 })
                 .orElseThrow(() -> {
-                    String mensagem = String.format("Filme não encontrado com o ID: %d", id);
+                    String mensagem = String.format("Curso não encontrado com o ID: %d", id);
                     log.warn(mensagem);
                     return new RuntimeException(mensagem);
                 });
     }
 
-    /**
-     * Atualiza um filme existente.
-     *
-     * @param id    o ID do filme a ser atualizado.
-     * @param filme o filme com as informações atualizadas.
-     * @return o filme atualizado.
-     */
     @Transactional
-    public Cursos atualizar(Long id, Cursos filme) {
-        log.info("Atualizando filme ID: {}", id);
-        return filmeRepository.findById(id)
-                .map(filmeExistente -> {
-                    log.debug("Dados atuais do filme: {}", filmeExistente);
-                    log.debug("Novos dados: {}", filme);
-                    filme.setId(id);
-                    Cursos filmeAtualizado = filmeRepository.save(filme);
-                    log.info("Filme ID: {} atualizado com sucesso. Novo título: {}",
-                            id, filmeAtualizado.getTitulo());
-                    return filmeAtualizado;
+    public Cursos atualizar(Long id, Cursos cursoNovosDados) {
+        log.info("Atualizando curso ID: {}", id);
+        return cursosRepository.findById(id)
+                .map(cursoExistente -> {
+                    log.debug("Dados atuais do curso: {}", cursoExistente);
+                    log.debug("Novos dados recebidos: {}", cursoNovosDados);
+
+                    // Atualizando os campos da sua Model
+                    cursoExistente.setNome(cursoNovosDados.getNome());
+                    cursoExistente.setDataInicio(cursoNovosDados.getDataInicio());
+                    cursoExistente.setDataFinal(cursoNovosDados.getDataFinal());
+                    cursoExistente.setDuracaoPeriodo(cursoNovosDados.getDuracaoPeriodo());
+                    cursoExistente.setFormaPagamento(cursoNovosDados.getFormaPagamento());
+
+                    Cursos cursoAtualizado = cursosRepository.save(cursoExistente);
+                    log.info("Curso ID: {} atualizado com sucesso. Novo nome: {}", id, cursoAtualizado.getNome());
+                    return cursoAtualizado;
                 })
                 .orElseThrow(() -> {
-                    String mensagem = String.format("Falha ao atualizar: filme não encontrado com o ID: %d", id);
+                    String mensagem = String.format("Falha ao atualizar: curso não encontrado com o ID: %d", id);
                     log.warn(mensagem);
                     return new RuntimeException(mensagem);
                 });
     }
 
-    /**
-     * Salva um novo filme.
-     *
-     * @param filme o filme a ser salvo.
-     * @return o filme salvo.
-     */
     @Transactional
-    public Cursos salvar(Cursos filme) {
-        log.info("Salvando novo filme: {}", filme.getTitulo());
+    public Cursos salvar(Cursos curso) {
+        log.info("Salvando novo curso: {}", curso.getNome());
         try {
-            Cursos filmeSalvo = filmeRepository.save(filme);
-            log.info("Filme salvo com sucesso. ID: {}, Título: {}", filmeSalvo.getId(), filmeSalvo.getTitulo());
-            return filmeSalvo;
+            Cursos cursoSalvo = cursosRepository.save(curso);
+            log.info("Curso salvo com sucesso. ID: {}, Nome: {}", cursoSalvo.getId(), cursoSalvo.getNome());
+            return cursoSalvo;
         } catch (Exception e) {
-            log.error("Falha ao salvar filme '{}': {}", filme.getTitulo(), e.getMessage(), e);
+            log.error("Falha ao salvar curso '{}': {}", curso.getNome(), e.getMessage(), e);
             throw e;
         }
     }
 
-    /**
-     * Exclui um filme existente.
-     *
-     * @param id o ID do filme a ser excluído.
-     */
     @Transactional
     public void excluir(Long id) {
-        log.info("Excluindo filme ID: {}", id);
-        if (!filmeRepository.existsById(id)) {
-            String mensagem = String.format("Falha ao excluir: filme não encontrado com o ID: %d", id);
+        log.info("Excluindo curso ID: {}", id);
+        if (!cursosRepository.existsById(id)) {
+            String mensagem = String.format("Falha ao excluir: curso não encontrado com o ID: %d", id);
             log.warn(mensagem);
             throw new RuntimeException(mensagem);
         }
         try {
-            filmeRepository.deleteById(id);
-            log.info("Filme ID: {} excluído com sucesso", id);
+            cursosRepository.deleteById(id);
+            log.info("Curso ID: {} excluído com sucesso", id);
         } catch (Exception e) {
-            log.error("Erro ao excluir filme ID {}: {}", id, e.getMessage(), e);
+            log.error("Erro ao excluir curso ID {}: {}", id, e.getMessage(), e);
             throw e;
         }
     }
-
 }

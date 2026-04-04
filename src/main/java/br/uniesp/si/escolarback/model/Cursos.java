@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "filmes")
+@Table(name = "cursos")
 public class Cursos {
 
     @Id
@@ -19,20 +19,21 @@ public class Cursos {
     private Long id;
 
     @Column(nullable = false, length = 100)
-    private String titulo;
+    private String nome;
 
-    @Column(columnDefinition = "TEXT")
-    private String sinopse;
+    @Column(name = "data_Inicio")
+    private LocalDate dataInicio;
 
-    @Column(name = "data_lancamento")
-    private LocalDate dataLancamento;
+    @Column(name = "data_Final")
+    private LocalDate dataFinal;
 
-    @Column(length = 50)
-    private String genero;
+    @Column(name = "duracao_Periodo")
+    private Integer duracaoPeriodo;
 
-    @Column(name = "duracao_minutos")
-    private Integer duracaoMinutos;
+    @Column(name = "Forma_Pagamento")
+    private String formaPagamento;
 
-    @Column(name = "classificacao_indicativa", length = 10)
-    private String classificacaoIndicativa;
+
+
+
 }

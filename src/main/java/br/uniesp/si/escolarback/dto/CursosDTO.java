@@ -11,19 +11,20 @@ public class CursosDTO {
 
     private Long id;
 
-    @NotBlank(message = "O nome do funcionário é obrigatório")
+    @NotBlank(message = "O nome do curso é obrigatório")
     private String nome;
 
-    @Positive(message = "A idade deve ser um valor positivo")
-    private int idade;
+    @Positive(message = "A data de início do curso é obrigatória")
+    private LocalDate dataInicio;
 
-    @NotBlank(message = "O CPF é obrigatório")
-    private String cpf;
+    @Positive(message = " A data final do curso é obrigatória")
+    private LocalDate dataFinal;
 
-    private LocalDate dataNascimento;
+    @Positive(message = "A duração do curso é obrigatória")
+    private Integer duracaoPeriodo;
 
-    @NotBlank(message = "O cargo é obrigatório")
-    private String cargo;
+    @NotBlank(message = "Forma de pagamento é obrigatória")
+    private String formaPagamento;
 
 }
 
