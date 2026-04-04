@@ -1,6 +1,6 @@
 package br.uniesp.si.escolarback.controller;
 
-import br.uniesp.si.escolarback.dto.AlunoDTO; // Certifique-se que o nome do DTO é AlunoDTO
+import br.uniesp.si.escolarback.dto.AlunoDTO;
 import br.uniesp.si.escolarback.service.AlunoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 @RestController
-@RequestMapping("/alunos") // Mudado de /funcionario para /alunos
+@RequestMapping("/alunos")
 public class AlunoController {
 
     private final AlunoService service;
@@ -27,10 +27,10 @@ public class AlunoController {
     @GetMapping
     public ResponseEntity<List<AlunoDTO>> listar() {
         log.info("Requisição para listar alunos");
-        return ResponseEntity.ok(service.listar()); // Cuidado com o 'L' maiúsculo/minúsculo
+        return ResponseEntity.ok(service.listar());
     }
 
-    // Adicionei o GET por ID que estava faltando para completar os 5 endpoints!
+
     @GetMapping("/{id}")
     public ResponseEntity<AlunoDTO> buscarPorId(@PathVariable Long id) {
         log.info("Requisição para buscar aluno ID: {}", id);

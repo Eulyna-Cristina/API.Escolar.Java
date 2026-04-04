@@ -28,7 +28,7 @@ public class AlunoService {
         return mapper.toDTO(salvo);
     }
 
-    public List<AlunoDTO> listar() { // 'l' minúsculo para seguir o padrão Java
+    public List<AlunoDTO> listar() {
         log.info("Buscando todos os alunos");
         List<Aluno> alunos = repository.findAll();
         return alunos.stream()
@@ -36,7 +36,7 @@ public class AlunoService {
                 .collect(Collectors.toList());
     }
 
-    // ADICIONADO: Método necessário para o GET por ID
+
     public AlunoDTO buscarPorId(Long id) {
         log.info("Buscando aluno por ID: {}", id);
         return repository.findById(id)
