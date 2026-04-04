@@ -15,7 +15,7 @@ public class AlunoMapper {
         Aluno aluno = new Aluno();
         aluno.setId(dto.getId());
         aluno.setNome(dto.getNome());
-        aluno.setCurso(dto.getCurso());
+        aluno.setCurso(dto.getCursos());
         aluno.setIdade(dto.getIdade());
         aluno.setCpf(dto.getCpf());
         aluno.setDatanasc(dto.getDatanasc());
@@ -37,7 +37,7 @@ public class AlunoMapper {
         AlunoDTO dto = new AlunoDTO();
         dto.setId(entity.getId());
         dto.setNome(entity.getNome());
-        dto.setCurso(entity.getCurso());
+        dto.setCursos(entity.getCurso());
         dto.setIdade(entity.getIdade());
         dto.setCpf(entity.getCpf());
         dto.setDatanasc(entity.getDatanasc());

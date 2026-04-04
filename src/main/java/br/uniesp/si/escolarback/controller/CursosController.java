@@ -13,12 +13,12 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cursos") // Alterado de /filmes para /cursos
+@RequestMapping("/cursos")
 @RequiredArgsConstructor
 @Slf4j
-public class CursosController { // Alterado de AlunoController para CursoController
+public class CursosController {
 
-    private final CursosService cursosService; // Nome da variável corrigido
+    private final CursosService cursosService;
 
     @GetMapping
     public List<Cursos> listar() {
@@ -39,7 +39,7 @@ public class CursosController { // Alterado de AlunoController para CursoControl
 
     @PostMapping
     public ResponseEntity<Cursos> criar(@Valid @RequestBody Cursos curso) {
-        log.info("Criando novo curso: {}", curso.getNome()); // Supondo que Cursos tem getNome()
+        log.info("Criando novo curso: {}", curso.getNome());
         try {
             Cursos cursoSalvo = cursosService.salvar(curso);
 
