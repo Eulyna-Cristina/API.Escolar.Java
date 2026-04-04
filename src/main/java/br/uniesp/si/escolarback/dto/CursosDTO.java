@@ -1,4 +1,4 @@
-package br.uniesp.si.techback.dto;
+package br.uniesp.si.escolarback.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
@@ -7,7 +7,7 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class FuncionarioDTO {
+public class CursosDTO {
 
     private Long id;
 

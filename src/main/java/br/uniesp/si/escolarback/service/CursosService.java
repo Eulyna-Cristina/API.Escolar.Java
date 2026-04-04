@@ -1,7 +1,7 @@
-package br.uniesp.si.techback.service;
+package br.uniesp.si.escolarback.service;
 
-import br.uniesp.si.techback.model.Filme;
-import br.uniesp.si.techback.repository.FilmeRepository;
+import br.uniesp.si.escolarback.model.Cursos;
+import br.uniesp.si.escolarback.repository.CursosRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,14 +12,14 @@ import java.util.List;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class FilmeService {
+public class CursosService {
 
-    private final FilmeRepository filmeRepository;
+    private final CursosRepository filmeRepository;
 
-    public List<Filme> listar() {
+    public List<Cursos> listar() {
         log.info("Buscando todos os filmes cadastrados");
         try {
-            List<Filme> filmes = filmeRepository.findAll();
+            List<Cursos> filmes = filmeRepository.findAll();
             log.debug("Total de filmes encontrados: {}", filmes.size());
             return filmes;
         } catch (Exception e) {
@@ -32,7 +32,7 @@ public class FilmeService {
      * @param id o ID do filme.
      * @return o filme encontrado, ou lança uma exceção {@link RuntimeException} se o filme não existir.
      */
-    public Filme buscarPorId(Long id) {
+    public Cursos buscarPorId(Long id) {
         log.info("Buscando filme pelo ID: {}", id);
         return filmeRepository.findById(id)
                 .map(filme -> {
@@ -54,14 +54,14 @@ public class FilmeService {
      * @return o filme atualizado.
      */
     @Transactional
-    public Filme atualizar(Long id, Filme filme) {
+    public Cursos atualizar(Long id, Cursos filme) {
         log.info("Atualizando filme ID: {}", id);
         return filmeRepository.findById(id)
                 .map(filmeExistente -> {
                     log.debug("Dados atuais do filme: {}", filmeExistente);
                     log.debug("Novos dados: {}", filme);
                     filme.setId(id);
-                    Filme filmeAtualizado = filmeRepository.save(filme);
+                    Cursos filmeAtualizado = filmeRepository.save(filme);
                     log.info("Filme ID: {} atualizado com sucesso. Novo título: {}",
                             id, filmeAtualizado.getTitulo());
                     return filmeAtualizado;
@@ -80,10 +80,10 @@ public class FilmeService {
      * @return o filme salvo.
      */
     @Transactional
-    public Filme salvar(Filme filme) {
+    public Cursos salvar(Cursos filme) {
         log.info("Salvando novo filme: {}", filme.getTitulo());
         try {
-            Filme filmeSalvo = filmeRepository.save(filme);
+            Cursos filmeSalvo = filmeRepository.save(filme);
             log.info("Filme salvo com sucesso. ID: {}, Título: {}", filmeSalvo.getId(), filmeSalvo.getTitulo());
             return filmeSalvo;
         } catch (Exception e) {

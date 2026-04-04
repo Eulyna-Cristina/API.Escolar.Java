@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.uniesp.si</groupId>
-	<artifactId>techback</artifactId>
+	<artifactId>escolarback</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>techback</name>
 	<description>Backend 1 Uniesp</description>

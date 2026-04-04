@@ -1,18 +1,18 @@
-package br.uniesp.si.techback.mapper;
+package br.uniesp.si.escolarback.mapper;
 
-import br.uniesp.si.techback.dto.FilmeDTO;
-import br.uniesp.si.techback.model.Filme;
+import br.uniesp.si.escolarback.dto.AlunoDTO;
+import br.uniesp.si.escolarback.model.Cursos;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FilmeMapper {
+public class CursosMapper {
 
-    public Filme toEntity(FilmeDTO dto) {
+    public Cursos toEntity(AlunoDTO dto) {
         if (dto == null) {
             return null;
         }
 
-        Filme filme = new Filme();
+        Cursos filme = new Cursos();
         filme.setId(dto.getId());
         filme.setTitulo(dto.getTitulo());
         filme.setSinopse(dto.getSinopse());
@@ -24,12 +24,12 @@ public class FilmeMapper {
         return filme;
     }
 
-    public FilmeDTO toDTO(Filme entity) {
+    public AlunoDTO toDTO(Cursos entity) {
         if (entity == null) {
             return null;
         }
 
-        FilmeDTO dto = new FilmeDTO();
+        AlunoDTO dto = new AlunoDTO();
         dto.setId(entity.getId());
         dto.setTitulo(entity.getTitulo());
         dto.setSinopse(entity.getSinopse());

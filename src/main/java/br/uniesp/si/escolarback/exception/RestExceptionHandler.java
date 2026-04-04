@@ -1,4 +1,4 @@
-package br.uniesp.si.techback.exception;
+package br.uniesp.si.escolarback.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,6 @@
-package br.uniesp.si.techback.model;
+package br.uniesp.si.escolarback.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Entity
 @Table(name = "filmes")
-public class Filme {
+public class Cursos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
