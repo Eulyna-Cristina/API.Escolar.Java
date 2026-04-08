@@ -1,2 +1,2 @@
 Eulyna Cristina,
-Lenilson Pereira 
+Lenilson Pereira e Luana Patricia
